@@ -1,0 +1,92 @@
+body {
+	font: 'Raleway', sans-serif;
+    color: rgba(0,0,0,.5);
+    top: 15%;
+	background: linear-gradient(to right, rgb(83, 172, 172), rgb(245, 157, 61)); /* Standard syntax */
+}
+
+
+.image1 {
+    position: relative;
+    height:200px;
+    width:200px;
+    overflow: hidden;
+}
+
+  
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.spin-animation {
+    animation-name: spin;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#soundboard-container {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+  
+.dropdown {
+    position: relative;
+    display:flex;
+}
+  
+.dropdown-header {
+    width:80px;
+    text-align:center;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 1.7em;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+  
+.dropdown-content.active {
+    display: flex;
+    /* flex-direction: column; */
+    /* position: absolute; */
+    /* top: 100%; */
+    /* left: 0; */
+    background-color: white;
+    z-index: 1;
+}
+  
+.dropdown:hover .dropdown-header {
+    background-color: #eee;
+}
+  
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* --------------------- button styling ----------------- */
+
+.sound-button {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .sound-button:hover {
+    background-color: #3e8e41;
+  }
+  
+  
