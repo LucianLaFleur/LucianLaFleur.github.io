@@ -1,10 +1,70 @@
+html {
+    margin: 0;
+    padding: 0;    
+}
+
 body {
+    margin: 0;
+    padding: 0;
 	font: 'Raleway', sans-serif;
     color: rgba(0,0,0,.5);
     top: 15%;
-	background: linear-gradient(to right, rgb(83, 172, 172), rgb(245, 157, 61)); /* Standard syntax */
+	background: linear-gradient(to right, rgb(150, 150, 150), rgb(5, 5, 5)); /* Standard syntax for gradient */
 }
 
+.navbar {
+    border-bottom: 5px solid rgb(94, 94, 94);
+    display: flex;
+    height: 70px;
+    background: linear-gradient(to right, rgb(0, 0, 0), rgb(179, 10, 10));
+    position: fixed; /* Make the navbar fixed to the top of the page */
+    top: 0;
+    left: 0;
+    width: 100%; /* Make the navbar span across the whole screen */
+    z-index: 100; /* Set a high z-index to ensure the navbar stays on top of other elements */
+    align-items: center; /* Center the items vertically within the navbar */
+    justify-content: space-between; /* Add space between items, pushing "more" item to the right */
+}
+
+.navbar-right-container {
+    margin-left: auto; /* Push "more" item to the right */
+}
+
+.navbar-item {
+    display: inline-block;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 25px;
+    font-weight:400;
+    border: 4px solid #ffffff00;
+    padding: 10px 20px; /* Set padding for the navbar items */
+    color: #fff; /* Set text color */
+    text-decoration: none; /* Remove default underline */
+}
+
+.navbar-item:hover {
+    color: hsl(115, 100%, 50%);
+    font-size: 35px;
+    background-color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border-radius: 20px 10%;
+    border:4px solid #444444b4;
+}
+
+#redRoseYork:hover{
+    /* remove bg alteration that's set on all the others */
+    background-color: rgba(0, 0, 0, 0);
+    border: 4px solid #ffffff00;
+}
+
+/* .navbar:hover {
+    -webkit-box-shadow: inset 0px 0px 11px 8px #6F1158; 
+    box-shadow: inset 0px 0px 11px 8px #6F1158;
+} */
+
+#redRoseYork {
+    height: 56px;
+    margin: -5px 0 0 -12px;
+}
 
 .image1 {
     position: relative;
@@ -18,35 +78,51 @@ body {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
+
 .spin-animation {
     animation-name: spin;
-    animation-duration: 2s;
+    animation-duration: 2.3s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
+#spaceDummy {
+    height: 75px;
+    background-color: black;
+}
+
 #soundboard-container {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 20px;
+    background-color: #3b3b3b;
+    -webkit-box-shadow: inset 0px 0px 11px 13px #000000; 
+    box-shadow: inset 0px 0px 11px 13px #000000;
+    padding: 12px 0 10px 10px;
+    border-bottom: 5px solid rgb(94, 94, 94);
 }
   
 .dropdown {
     position: relative;
+    align-items: center;
     display:flex;
+    padding: 0 0 10px 0;
 }
   
 .dropdown-header {
-    width:80px;
+    width:105px;
     text-align:center;
     cursor: pointer;
     padding: 10px;
     font-size: 1.7em;
     font-weight: bold;
-    border: 1px solid #ccc;
+    border: 3px solid #00aa0e;
     border-radius: 5px;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-header:hover {
+    border-color: #a82d8a;
+    -webkit-box-shadow: inset 0px 0px 11px 3px #8d477c; 
+    box-shadow: inset 0px 0px 11px 3px #8d477c;
 }
 
 .dropdown-content {
@@ -56,10 +132,6 @@ body {
   
 .dropdown-content.active {
     display: flex;
-    /* flex-direction: column; */
-    /* position: absolute; */
-    /* top: 100%; */
-    /* left: 0; */
     background-color: white;
     z-index: 1;
 }
@@ -86,7 +158,20 @@ body {
   }
   
   .sound-button:hover {
-    background-color: #3e8e41;
+    background-color: #295f2b;
+  }
+
+  .sound-button:active {
+    background-color: #00f7ff;
   }
   
-  
+  #cog-header {
+    margin: 5px 0 10px -80px;
+    border-radius: 30px;
+    max-width: fit-content;
+    display: flex;
+    font-size:1.4em;
+    background-color: rgb(134, 20, 20);
+    padding: 0 12px 0 82px;
+    color: rgb(0, 185, 185);
+  }

@@ -8,6 +8,22 @@
     <link rel="stylesheet" type="text/css" href="soundboard1.css">
 </head>
 <body>
+    <!-- <div class="navbar">
+        <img id="redRoseYork" class="navbar-item" src=".\imgs\redYorkRose2.png">
+        <a href="#home" class="navbar-item">Home</a>
+        <a href="#about" class="navbar-item">About</a>
+        <a href="#projects" class="navbar-item">Projects</a>
+    </div> -->
+    <div class="navbar">
+        <img id="redRoseYork" class="navbar-item" src=".\imgs\redYorkRose2.png">
+        <a href="#home" class="navbar-item">Home</a>
+        <a href="#about" class="navbar-item">About</a>
+        <a href="#projects" class="navbar-item">Projects</a>
+        <div class="navbar-right-container">
+            <a href="#more" class="navbar-item">More</a>
+        </div>
+    </div>      
+    <div id="spaceDummy"></div>
 
     <div id="soundboard-container">
         <div class="dropdown">
@@ -72,7 +88,6 @@
                 Drops
             </div>
             <div class="dropdown-content">
-                <button class="sound-button" id="shwarzTheme"> SW Theme </button>
                 <button class="sound-button" id="firstOrderTheme"> First Order </button>
                 <button class="sound-button" id="itsATrap"> Trap! </button>
                 <button class="sound-button" id="phonkToggleBtn"> Phonk </button>
@@ -81,7 +96,11 @@
             </div>
         </div>
     </div>
-    <img src="empireCog.png" id="target-for-spin" alt="Base image" class="image1">
+    <div>
+        <h3 id="cog-header">Icons play music!</h3>
+        <img src=".\imgs\empireCog.png" id="empire-cog" alt="imperial cog" class="image1">
+        <img src=".\imgs\rebelVektor.png" id="rebel-crest" alt="rebel symbol" class="image1">
+    </div>
 </body>
 
 <script src="soundboard1.js"></script> 

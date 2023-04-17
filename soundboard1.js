@@ -1,44 +1,32 @@
+//----------------------------------------------------
 
-// img spinner animation
-const spinImage = document.getElementById('target-for-spin');
-let isSpinning = false;
-spinImage.addEventListener('click', () => {
-    if (isSpinning) {
-        spinImage.classList.remove('spin-animation');
-        isSpinning = false;
-    } else {
-        spinImage.classList.add('spin-animation');
-        isSpinning = true;
-    }
-});
-
-let isAudioPlaying = false;
-function startAnimation() {
-    spinImage.classList.add('spin-animation');
-    isSpinning = true;
-}
-function stopAnimation() {
-    spinImage.classList.remove('spin-animation');
-    isSpinning = false;
-}
-function updateAnimation() {
-    if (isAudioPlaying && !isSpinning) {
-        startAnimation();
-    } else if (!isAudioPlaying && isSpinning) {
-        stopAnimation();
-    }
-}
-const audioElements = document.querySelectorAll('audio');
-audioElements.forEach((audio) => {
-    audio.addEventListener('play', () => {
-        isAudioPlaying = true;
-        updateAnimation();
-    });
-    audio.addEventListener('pause', () => {
-        isAudioPlaying = false;
-        updateAnimation();
-    });
-});
+// let isAudioPlaying = false;
+// function startAnimation() {
+//     spinImage.classList.add('spin-animation');
+//     isSpinning = true;
+// }
+// function stopAnimation() {
+//     spinImage.classList.remove('spin-animation');
+//     isSpinning = false;
+// }
+// function updateAnimation() {
+//     if (isAudioPlaying && !isSpinning) {
+//         startAnimation();
+//     } else if (!isAudioPlaying && isSpinning) {
+//         stopAnimation();
+//     }
+// }
+// const audioElements = document.querySelectorAll('audio');
+// audioElements.forEach((audio) => {
+//     audio.addEventListener('play', () => {
+//         isAudioPlaying = true;
+//         updateAnimation();
+//     });
+//     audio.addEventListener('pause', () => {
+//         isAudioPlaying = false;
+//         updateAnimation();
+//     });
+// });
 
 let currentSound
 function playSound(soundFile) {
@@ -46,16 +34,8 @@ function playSound(soundFile) {
     if (sound === currentSound) {
         if (sound.paused) {
             sound.play();
-            spinImage.classList.add("spin-animation");
-            isSpinning = true
-            audio.addEventListener("ended", function() {
-                spinImage.classList.remove("spin-animation");
-                isSpinning = false;
-            })
         } else {
             sound.pause();
-            spinImage.classList.remove("spin-animation");
-            isSpinning = false;
             sound.currentTime = 0;
         }
     } else {
@@ -72,7 +52,7 @@ function playSound(soundFile) {
   }
 
 // set audio source, triggering button, inner text for stop and start, and flag for prior audio to finish set to true
-// so it won't interfere by default
+// so it won't interfere by 
 function handleAudioPause(audio, toggleBtn, stopText, startText, finishFlag=true) {
     if (audio.paused) {
         audio.play();
@@ -135,16 +115,90 @@ function loopSound(audSource, buttonId, startText, stopText) {
     });
 }
 
-// ["./blasterFX/turret2.wav", "./blasterFX/turret1.wav"]
+
+let alreadySpinning = false
+// load the audio elements so I can check their status outside of the function
+
+// need to add the audio elements so the DOM can detect them
+rebelTheme = new Audio("./soundDrops/starWarsThemeIntroBit.wav")
+document.body.appendChild(rebelTheme);
+empireTheme = new Audio("./soundDrops/sarWarsImperialArrivalShort.wav")
+document.body.appendChild(empireTheme);
+
+function spinImgWithSoundHeader(audio, imgId, headerId, startText, stopText, otherAudSource, otherImgId) {
+    
+    audio.loop = true;
+
+    var otherAudioElement = document.querySelector(`audio[src="${otherAudSource}"]`)
+
+    var toggleHeader = document.getElementById(headerId);
+    var targetImage = document.getElementById(imgId);
+    var otherImage = document.getElementById(otherImgId);
+
+    targetImage.addEventListener("click", function() {
+        if (audio.paused) {
+            try {
+                if (!otherAudioElement.paused) {
+                    console.log("other audio has been paused")
+                    otherAudioElement.pause();
+                    otherImage.classList.remove('spin-animation');
+                } else {
+                    console.log("other aud is not active")
+                }
+                }catch (error) {
+                    console.log(`${otherAudioElement} hasn't been found`)
+                }
+            audio.play();
+            toggleHeader.innerHTML = stopText;
+            targetImage.classList.add('spin-animation');
+            alreadySpinning = true;
+        } else {
+            audio.pause();
+            toggleHeader.innerHTML = startText;
+            targetImage.classList.remove('spin-animation');
+            alreadySpinning = false;
+        }
+    });
+    
+    audio.addEventListener("canplay", function() {
+        targetImage.disabled = false;
+        toggleHeader.innerHTML = startText;
+    });
+}
+
+
+// img spinner animation
+// const cogImage = document.getElementById('empire-cog');
+// const cogHeader = document.getElementById('cog-header');
+// let isSpinning = false;
+// spinImage.addEventListener('click', () => {
+//     if (isSpinning) {
+//         spinImage.classList.remove('spin-animation');
+//         isSpinning = false;
+//     } else {
+//         spinImage.classList.add('spin-animation');
+//         isSpinning = true;
+//     }
+// });
+
   
 window.onload = function() {
+    (function() {
+        spinImgWithSoundHeader(empireTheme, "empire-cog", "cog-header", "start on click", "click to stop", "./soundDrops/starWarsThemeIntroBit.wav", "rebel-crest");
+        })();
+    (function() {
+        spinImgWithSoundHeader(rebelTheme, "rebel-crest", "cog-header", "start on click", "click to stop", "./soundDrops/sarWarsImperialArrivalShort.wav", "empire-cog");
+    })();
     trigger1Loop2("./widePutinMeme1.wav", "./widePutinLoop1.wav", "wideThemeBtn")
     loopSound("./phonkWalkLoop.wav", "phonkToggleBtn", "Start Phonk", "Stop Phonking")
     loopSound("./machineFX/probeDroidDroningSound.wav", "probeDroneLoop", "Start Droning", "Stop Droning")
     loopSound("./walkerLoop1.wav", "walkerLoopBtn", "Walker Go!", "Halt Walker")
+    loopSound("./soundDrops/sarWarsImperialArrivalShort.wav", "firstOrderTheme", "first order", "stop order")
+    // spinImgWithSoundHeader(rebelTheme, "rebel-crest", "cog-header", "start on click", "click to stop", "./soundDrops/sarWarsImperialArrivalShort.wav", "empire-cog")
+    // spinImgWithSoundHeader(empireTheme, "empire-cog", "cog-header", "start on click", "click to stop", "./soundDrops/starWarsThemeIntroBit.wav", "rebel-crest")
 };
   
-  
+
 //  ------------------------ Turret, alternating sounds ----------------
 let turretSoundIndex = 0;
 const turretSoundFiles = ["./blasterFX/turret2.wav", "./blasterFX/turret1.wav"];
@@ -268,12 +322,6 @@ document.getElementById("randExplode").addEventListener("click", function() {
 });
 document.getElementById("medExplode1").addEventListener("click", function() {
     playSound("./blasterFX/machineDestroyed1.wav");
-});
-document.getElementById("shwarzTheme").addEventListener("click", function() {
-    playSound("./soundDrops/starWarsThemeIntroBit.wav");
-});
-document.getElementById("firstOrderTheme").addEventListener("click", function() {
-    playSound("./soundDrops/sarWarsImperialArrivalShort.wav");
 });
 document.getElementById("dropBass").addEventListener("click", function() {
     playSound("./soundDrops/dropTheBass3.wav");
